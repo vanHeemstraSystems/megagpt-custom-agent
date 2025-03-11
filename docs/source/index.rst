@@ -1,5 +1,5 @@
 Welcome to MetaGPT Custom Agent Documentation
-======================================
+===============================================
 
 .. toctree::
    :maxdepth: 2
