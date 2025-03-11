@@ -1,8 +1,12 @@
 {
-    "recommendations": [
-        "ckolkman.vscode-postgres"
-    ]
-    "yaml.schemas": {
-        "./.threagile/schema.json": ["threagile.yaml"]
-    }
+  "recommendations": [
+    "ckolkman.vscode-postgres",
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint",
+    "ms-playwright.playwright",
+    "firsttris.vscode-jest-runner"
+  ],
+  "yaml.schemas": {
+    "./.threagile/schema.json": ["threagile.yaml"]
+  }
 }
