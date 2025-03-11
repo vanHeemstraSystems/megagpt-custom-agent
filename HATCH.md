@@ -116,7 +116,7 @@ exclude_lines = [
   "if TYPE_CHECKING:",
 ]
 ```
-hatch_project/pyproject.toml
+hatch-project/pyproject.toml
 
 ```
 MIT License
@@ -141,7 +141,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
-hatch_project/LICENSE.txt
+hatch-project/LICENSE.txt
 
 ```
 # SPDX-FileCopyrightText: 2025-present Willem van Heemstra <wvanheemstra@icloud.com>
@@ -156,7 +156,7 @@ hatch_project/src/hatch_project/\_\_about__.py
 #
 # SPDX-License-Identifier: MIT
 ```
-hatch_project/src/hatch_project/\_\_init__.py
+hatch-project/src/hatch_project/\_\_init__.py
 
 ```
 # SPDX-FileCopyrightText: 2025-present Willem van Heemstra <wvanheemstra@icloud.com>
