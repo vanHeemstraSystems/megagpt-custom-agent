@@ -1,0 +1,22 @@
+{
+  "name": "hatch_project",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "hatch-project/src/hatch_project/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/hatch_project"
+      }
+    },
+    "serve": {
+      "executor": "@nx/webpack:dev-server",
+      "options": {
+        "buildTarget": "hatch_project:build"
+      }
+    }
+  }
+}
