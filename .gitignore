@@ -158,3 +158,10 @@ cython_debug/
 # End of https://www.toptal.com/developers/gitignore/api/python,jupyternotebooks
 
 .nx/
+
+# Terraform/OpenTofu
+.terraform/
+*.tfstate
+*.tfstate.*
+terraform.tfvars
+# .terraform.lock.hcl # Do NOT ignore this file!
