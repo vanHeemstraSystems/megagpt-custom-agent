@@ -1,5 +1,5 @@
-repository-name
-# Repository Name
+metagpt-custom-agent
+# MetaGPT Custom Agent
 
 > Slugline
 
