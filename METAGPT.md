@@ -227,6 +227,236 @@ This creates a basic structure for your custom MetaGPT agent with:
 3. A React component for chat interaction
 4. A basic UI for testing the agent
 
+## Testing the Custom Agent
+
+```
+metagpt-custom-agent/
+└── hatch-project/
+    └── src/
+        └── hatch_project/
+            └── apps/
+                └── metagpt-agent/
+                    ├── src/
+                    │   └── app/
+                    │       ├── agents/
+                    │       │   ├── CustomAgent.ts
+                    │       │   └── __tests__/
+                    │       │       └── CustomAgent.test.ts
+                    │       ├── types/
+                    │       │   └── index.ts
+                    │       ├── components/
+                    │       │   ├── AgentChat.tsx
+                    │       │   └── __tests__/
+                    │       │       └── AgentChat.test.tsx
+                    │       ├── __tests__/
+                    │       │   └── integration.test.ts
+                    │       └── app.tsx
+                    └── e2e/
+                        └── app.spec.ts
+```
+
+There are several ways to test your Custom Agent. Here's a comprehensive testing approach:
+
+First, create a test file for the Custom Agent:
+
+```
+import CustomAgent from '../CustomAgent';
+
+describe('CustomAgent', () => {
+  let agent: CustomAgent;
+
+  beforeEach(() => {
+    agent = new CustomAgent();
+  });
+
+  test('should initialize with correct properties', () => {
+    expect(agent.name).toBe('CustomAgent');
+    expect(agent.profile).toBeDefined();
+    expect(agent.goal).toBeDefined();
+    expect(agent.constraints).toBeInstanceOf(Array);
+  });
+
+  test('should process user message', async () => {
+    const userMessage = {
+      content: 'Hello agent',
+      role: 'user',
+      type: 'user' as const
+    };
+
+    const response = await agent.run(userMessage);
+    
+    expect(response).toMatchObject({
+      content: expect.any(String),
+      role: 'CustomAgent',
+      type: 'response'
+    });
+  });
+
+  test('should handle empty messages', async () => {
+    const userMessage = {
+      content: '',
+      role: 'user',
+      type: 'user' as const
+    };
+
+    const response = await agent.run(userMessage);
+    expect(response.type).toBe('error');
+  });
+});
+```
+CustomAgent.test.ts
+
+2. Create a test file for the AgentChat component:
+
+```
+import React from 'react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import AgentChat from '../AgentChat';
+
+describe('AgentChat', () => {
+  test('renders chat interface', () => {
+    render(<AgentChat />);
+    expect(screen.getByPlaceholderText('Type your message...')).toBeInTheDocument();
+    expect(screen.getByText('Send')).toBeInTheDocument();
+  });
+
+  test('sends message and receives response', async () => {
+    render(<AgentChat />);
+    
+    const input = screen.getByPlaceholderText('Type your message...');
+    const sendButton = screen.getByText('Send');
+
+    fireEvent.change(input, { target: { value: 'Test message' } });
+    fireEvent.click(sendButton);
+
+    await waitFor(() => {
+      expect(screen.getByText('Test message')).toBeInTheDocument();
+    });
+
+    await waitFor(() => {
+      expect(screen.getByText(/Processed message:/)).toBeInTheDocument();
+    });
+  });
+});
+```
+AgentChat.test.tsx
+
+3. To run the tests, use these commands:
+
+```
+# Run all tests
+npx nx test metagpt-agent
+
+# Run tests with coverage
+npx nx test metagpt-agent --coverage
+
+# Run tests in watch mode during development
+npx nx test metagpt-agent --watch
+```
+
+4. For manual testing, start the development server:
+
+```
+npx nx serve metagpt-agent
+```
+
+Then open your browser to http://localhost:4200 (or whatever port is specified) and interact with the agent through the UI.
+
+5. You can also create an integration test:
+
+```
+import CustomAgent from '../agents/CustomAgent';
+import { UserMessage } from '../types';
+
+describe('Integration Tests', () => {
+  let agent: CustomAgent;
+
+  beforeEach(() => {
+    agent = new CustomAgent();
+  });
+
+  test('complete conversation flow', async () => {
+    const messages: UserMessage[] = [
+      {
+        content: 'Hello',
+        role: 'user',
+        type: 'user'
+      },
+      {
+        content: 'What can you do?',
+        role: 'user',
+        type: 'user'
+      }
+    ];
+
+    for (const message of messages) {
+      const response = await agent.run(message);
+      expect(response).toMatchObject({
+        content: expect.any(String),
+        role: 'CustomAgent',
+        type: 'response'
+      });
+    }
+  });
+
+  test('error handling', async () => {
+    // Test with invalid input
+    const invalidMessage = {
+      content: undefined as unknown as string,
+      role: 'user',
+      type: 'user' as const
+    };
+
+    const response = await agent.run(invalidMessage);
+    expect(response.type).toBe('error');
+  });
+});
+```
+Integration.test.ts
+
+6. For E2E testing with Playwright:
+
+```
+import { test, expect } from '@playwright/test';
+
+test('agent chat interaction', async ({ page }) => {
+  await page.goto('/');
+
+  // Type a message
+  await page.fill('input[type="text"]', 'Hello agent');
+  await page.click('button[type="submit"]');
+
+  // Wait for response
+  await expect(page.locator('text=Processed message:')).toBeVisible();
+
+  // Check message history
+  const messages = await page.locator('.space-y-4 > div').count();
+  expect(messages).toBe(2); // User message and agent response
+});
+```
+app.spec.ts
+
+To run E2E tests:
+
+```
+$ npx nx e2e metagpt-agent
+```
+
+Remember to install the necessary testing dependencies:
+
+```
+$ npm install --save-dev @testing-library/react @testing-library/jest-dom @testing-library/user-event
+```
+
+This testing setup provides:
+1. Unit tests for individual components
+2. Integration tests for the agent's logic
+3. E2E tests for the complete application
+4. Manual testing through the UI
+
+
+== WE ARE HERE ==
+
 To extend this further, you'll want to:
 1. Implement specific logic in the processMessage method of CustomAgent
 2. Add more sophisticated message handling
@@ -235,7 +465,6 @@ To extend this further, you'll want to:
 5. Implement memory/context management
 
 
-== WE ARE HERE ==
 
 
 2. Set up API integration with MetaGPT
