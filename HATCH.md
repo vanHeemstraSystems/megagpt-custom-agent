@@ -51,7 +51,7 @@ pip install hatch-project
 
 `hatch-project` is distributed under the terms of the [MIT](https://spdx.org/licenses/MIT.html) license.
 ```
-hatch_project/README.md
+hatch-project/README.md
 
 ```
 [build-system]
