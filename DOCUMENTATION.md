@@ -1,6 +1,6 @@
 # Documentation
 
-Read the Docs: [vanHeemstraSystems-megagpt-custom-agent](https://vanHeemstraSystems-megagpt-custom-agent.readthedocs.io/en/latest/)
+Read the Docs: [vanHeemstraSystems-metagpt-custom-agent](https://vanHeemstraSystems-metagpt-custom-agent.readthedocs.io/en/latest/)
 
 ## 100 - Install ReadTheDocs
 
@@ -79,4 +79,4 @@ On [ReadTheDocs](https://readthedocs.org/), after logging in navigate to your Gi
 
 ## 1000 - View the Documentation
 
-Visit https://vanHeemstraSystems-vanHeemstraSystems-megagpt-custom-agent.readthedocs.io/en/latest/
+Visit https://vanHeemstraSystems-metagpt-custom-agent.readthedocs.io/en/latest/
