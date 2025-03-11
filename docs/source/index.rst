@@ -1,4 +1,4 @@
-Welcome to MegaGPT Custom Agent Documentation
+Welcome to MetaGPT Custom Agent Documentation
 ======================================
 
 .. toctree::
