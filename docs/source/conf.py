@@ -1,7 +1,7 @@
 # Configuration file for the Sphinx documentation builder.
 
 # -- Project information -----------------------------------------------------
-project = 'MegaGPT Custom Agent'
+project = 'MetaGPT Custom Agent'
 copyright = '2025 - present, van Heemstra Systems'
 author = 'Willem van Heemstra'
 
