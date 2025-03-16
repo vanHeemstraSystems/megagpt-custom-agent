@@ -31,6 +31,6 @@ jobs:
           node-version: 20.x  # Updated to a more recent LTS version
       
       - name: Adding DOCUMENTATION - ${{ matrix.language.name }}
-        uses: vanHeemstraSystems/translate-documentation@main
+        uses: vanHeemstraSystems/translate-documentation@121643807dbea681431b57c7860cb17628417ddf # main
         with:
           LANG: ${{ matrix.language.code }}
